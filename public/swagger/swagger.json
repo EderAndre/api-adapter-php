@@ -1,0 +1,242 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Adapter",
+        "description": "Api adapter from Portal Defensoria",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/audiencias": {
+            "get": {
+                "tags": [
+                    "Audiencias"
+                ],
+                "summary": "Get all register in portal api audiencias, identified by id_defensor. Default range date defined- between last Monday and the next Sunday ",
+                "description": "Get all register in portal api audiencias, identified by id_defensor.Default range date defined- between last Monday and the next Sunday",
+                "parameters": [
+                    {
+                        "name": "id_defensor",
+                        "in": "query",
+                        "description": "Id defensor(matricula)",
+                        "required": true,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A objects list from audiencias with attributes",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": [
+                                        {
+                                            "audiencias": [
+                                                {
+                                                    "type": "audiencia",
+                                                    "id": -1726795257,
+                                                    "data": "04/08/2020",
+                                                    "hora": "10:00",
+                                                    "defensor": "xd123456",
+                                                    "defensoria": 274,
+                                                    "processo": "00122000220083",
+                                                    "processoTipo": null,
+                                                    "solenidade": "Audiência",
+                                                    "situacao": null,
+                                                    "area": 3,
+                                                    "ativo": null,
+                                                    "fromTj": true,
+                                                    "orgaoJulgador": {
+                                                        "idOrgaoJulgador": 2115,
+                                                        "nome": "2º Juizado de Violência Doméstica e Familiar",
+                                                        "grau": "P",
+                                                        "foro": {
+                                                            "idForo": 1003,
+                                                            "nome": "Foro Central (Prédio I)"
+                                                        },
+                                                        "comarca": {
+                                                            "idComarca": 1002,
+                                                            "idComarcaT1g": 1,
+                                                            "nome": "Porto Alegre"
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unautorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": "Authentication Failed"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": "Invalid APi Key"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKey": [],
+                        "ApiClient": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/audienciasbyrange": {
+            "get": {
+                "tags": [
+                    "Audiencias"
+                ],
+                "summary": "Get all register in portal api audiencias, required defined dinamic range",
+                "description": "Get all register in portal api audiencias, identified by id_defensor",
+                "parameters": [
+                    {
+                        "name": "id_defensor",
+                        "in": "query",
+                        "description": "Id defensor(matricula)",
+                        "required": true,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "data_ini",
+                        "in": "query",
+                        "description": "Start date from query, formatted dd/MM/YYYY",
+                        "required": true,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "data_end",
+                        "in": "query",
+                        "description": "Start date from query, formatted dd/MM/YYYY",
+                        "required": true,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A objects list from audiencias with attributes",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": [
+                                        {
+                                            "audiencias": [
+                                                {
+                                                    "type": "audiencia",
+                                                    "id": -1726795257,
+                                                    "data": "04/08/2020",
+                                                    "hora": "10:00",
+                                                    "defensor": "xd123456",
+                                                    "defensoria": 274,
+                                                    "processo": "00122000220083",
+                                                    "processoTipo": null,
+                                                    "solenidade": "Audiência",
+                                                    "situacao": null,
+                                                    "area": 3,
+                                                    "ativo": null,
+                                                    "fromTj": true,
+                                                    "orgaoJulgador": {
+                                                        "idOrgaoJulgador": 2115,
+                                                        "nome": "2º Juizado de Violência Doméstica e Familiar",
+                                                        "grau": "P",
+                                                        "foro": {
+                                                            "idForo": 1003,
+                                                            "nome": "Foro Central (Prédio I)"
+                                                        },
+                                                        "comarca": {
+                                                            "idComarca": 1002,
+                                                            "idComarcaT1g": 1,
+                                                            "nome": "Porto Alegre"
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unautorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": "Authentication Failed"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": "Invalid APi Key"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKey": [],
+                        "ApiClient": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "ApiKey": {
+                "type": "apiKey",
+                "name": "X-API-KEY",
+                "in": "header"
+            },
+            "ApiClient": {
+                "type": "apiKey",
+                "name": "X-API-CLIENT",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Audiencias",
+            "description": "Audiencias endpoints"
+        }
+    ]
+}
